@@ -51,7 +51,7 @@ public_users.get("/isbn/:isbn", async function (req, res) {
   if (book) {
     return res.status(200).json({ book });
   } else {
-    return res.status(404).json({ message: "Book not found" });
+    return res.status(404).json({ message: "The book is not found" });
   }
 });
 
@@ -61,19 +61,19 @@ public_users.get("/author/:author", async function (req, res) {
   const authorName = req.params.author;
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
-      const filteredBooks = Object.values(books).filter(
+      const fb = Object.values(books).filter(
         (b) => b.author === authorName
       );
-      resolve(filteredBooks);
+      resolve(fb);
     }, 600);
   });
 
-  const filteredBooks = await promise;
+  const fb = await promise;
 
-  if (filteredBooks.length > 0) {
-    return res.status(200).json({ books: filteredBooks });
+  if (fb.length > 0) {
+    return res.status(200).json({ books: fb });
   } else {
-    return res.status(404).json({ message: "Book not found" });
+    return res.status(404).json({ message: "The book is not found" });
   }
 });
 
@@ -84,19 +84,19 @@ public_users.get("/title/:title", async function (req, res) {
 
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
-      const filteredBooks = Object.values(books).filter(
+      const fb = Object.values(books).filter(
         (b) => b.title === title
       );
-      return resolve(filteredBooks);
+      return resolve(fb);
     }, 600);
   });
 
-  const filteredBooks = await promise;
+  const fb = await promise;
 
-  if (filteredBooks.length > 0) {
-    return res.status(200).json({ books: filteredBooks });
+  if (fb.length > 0) {
+    return res.status(200).json({ books: fb });
   } else {
-    return res.status(404).json({ message: "Book not found" });
+    return res.status(404).json({ message: "The book is not found" });
   }
 });
 
